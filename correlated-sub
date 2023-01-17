@@ -1,0 +1,61 @@
+-- Online SQL Editor to Run SQL Online.
+-- Use the editor to create new tables, insert data and all other SQL operations.
+  
+--select * from emp e
+--where salary > (select avg(salary) from emp)
+
+--select * from emp e
+--join (select avg(salary) avgr from emp) avg_sal
+--on e.salary > avg_sal.avgr;
+
+--insert into emp values(111, 'asd','Admin', 55000);
+
+--multi row col subquery
+-- find emps with highet sal in each dept
+
+-- select dept_name, max(salary) from emp
+-- group by dept_name
+-- THIS WILL NOT O/P OUTSIDE DUPICATE VALUES
+
+--SELECT * FROM EMP
+--WHERE (DEPT_NAME,SALARY) IN (
+-- select dept_name, max(salary) from emp
+-- group by dept_name)
+
+--CREATE TABLE DEPARTMENT(
+--DEPT_ID INT,);
+ --DEPT_NAME VARCHAR(40) PRIMARY KEY,
+ --LOCATION VARCHAR(50));
+
+--insert into DEPARTMENT values (1,'HR','MUM');
+
+-- FIND DEPTS WITH NO EMPLOYEES
+
+--SELECT * FROM DEPARTMENT
+--WHERE DEPT_NAME NOT IN (SELECT DEPT_NAME FROM EMP)
+
+--find employeeswho earn more than the avg sal of their dept
+--correlated subqueries
+
+-- alt method
+--select * from emp
+--where salary >
+--(select avg(salary) from emp
+--group by dept_name)
+
+
+-- correlated inner subq is dependent on outer subq
+--runs like a nested loop
+-- emp table has 2 copies e1 and e2 for inner and outer parts
+
+--select * from emp e1
+--where salary >
+--(
+--select avg(salary) from emp e2
+--  where e2.dept_name = e1.dept_name
+--)
+
+--select * from department d
+--where not exists (select * from emp e
+  --               where e.dept_name = d.dept_name)
+
