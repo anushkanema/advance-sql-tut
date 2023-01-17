@@ -59,3 +59,62 @@
 --where not exists (select * from emp e
   --               where e.dept_name = d.dept_name)
 
+
+
+-- total sum of sales of each store
+--select store_name, sum(price) as tot_sales
+--from sales
+--group by store_name;
+
+--select *
+--from (select store_name, sum(price) as tot_sales from sales group by store_name) sales
+--join (select avg(tot_sales) as sales
+--      from (select store_name, sum(price) as tot_sales
+--			from sales
+			--group by store_name)x) avg_sales
+--on sales.tot_sales > avg_sales.sales
+
+-- select all employees and add a remark in front of those emps whose sal> avg
+
+--select * , (case when salary > (select avg(salary) from emp)
+--                   then 'higher than avg'
+--                 else null
+--           end )  as remarks
+-- from emp
+
+--select store_name, sum(quantity) as tot_quant
+--from sales
+--group by store_name
+
+/* select store_name, sum(quantity)
+from sales
+group by store_name
+having sum(quantity) > (select avg(quantity) from sales) */
+
+-- subquery in insert
+
+/* create table employee_history (
+  emp_id int primary key,
+  emp_name varchar(50),
+  dept_name varchar(50),
+  salary int,
+  location varchar(50)
+); */
+
+/*insert into employee_history 
+select e.emp_id,e.emp_name,e.dept_name,e.salary,d.location
+from emp e
+join department d 
+on e.dept_name = d.dept_name
+where not exists (select 1 from employee_history eh
+                    where eh.emp_id = e.emp_id )  */
+                    
+                    
+/* update emp e
+set salary = (select 
+             	from employee_history eh
+              where eh.dept_name = e.dept_name
+             )
+*/
+
+
